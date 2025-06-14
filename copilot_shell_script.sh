@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#prompt the user for a name
 echo "Welcome to the copilot shell script"
 echo "Enter the new assignment name:"
 read assignment_name
