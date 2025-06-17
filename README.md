@@ -1,126 +1,132 @@
-#Submission Reminder App
+# Submission Reminder System
 
-A shell-based application that helps track and remind students about pending assignment submissions.
+**Author:** Nkem Jeferson Achia
 
-# Project Overview
+## Overview
 
-This application consists of two main shell scripts that work together to:
-1. Set up a complete application environment with proper directory structure
-2. Allow dynamic updating of assignment names and check submission status
+This project is an automated submission reminder system that helps track student assignment submissions. It consists of two main scripts that work together to create a complete environment for managing and checking assignment submissions.
 
-## Repository Structure
-
-
-submission_reminder_app_NkemJefersonAchia/
-├── create_environment.sh          # Main setup script
-├── copilot_shell_script.sh        # Assignment management script
-└── README.md                      # This file
-
-
-## Files Description
+## Scripts
 
 ### 1. create_environment.sh
-The main setup script that handles everything automatically:
-- Prompts for user's name
-- Creates a directory named `submission_reminder_{yourName}`
-- Sets up the complete application structure with subdirectories and files
-- **Automatically creates and populates**: `reminder.sh`, `functions.sh`, `config.env`, `submissions.txt`, and `startup.sh`
-- Sets appropriate permissions for all executable files
-- **No manual file creation needed** - the script handles all content generation
+Creates the entire project structure and generates all necessary files automatically.
 
 ### 2. copilot_shell_script.sh
-The assignment management script that:
-- Prompts for a new assignment name
-- Updates the configuration file with the new assignment
-- Allows re-running the application with updated assignment data
+Updates assignment information and runs the submission reminder system.
 
-## How to Run the Application
+## Project Structure
 
-### Prerequisites
-- Linux/Unix environment with bash shell
-- Git (for version control)
-- Text editor permissions for file creation
+When you run `create_environment.sh`, it creates a directory named `submission_reminder_[YourName]` with the following structure:
 
-### Step 1: Clone the Repository
-bash
-git clone https://github.com/[YourUsername]/submission_reminder_app_[YourGithubUsername].git
-cd submission_reminder_app_[YourGithubUsername]
-
-
-### Step 2: Make Scripts Executable
-bash
-chmod +x create_environment.sh
-chmod +x copilot_shell_script.sh
-
-
-### Step 3: Run the Environment Setup
-bash
-./create_environment.sh
-
-- When prompted, enter your name
-- The script will create the complete application structure
-
-### Step 4: Navigate to Your Application Directory
-bash
-cd submission_reminder_{yourName}  # Replace {yourName} with the name you entered
-
-
-### Step 5: Test the Application
-bash
-./startup.sh
-
-This will run the reminder application and show students with pending submissions.
-
-## Application Directory Structure
-
-After running `create_environment.sh`, the following structure is created:
-
-
-submission_reminder_{yourName}/
+submission_reminder_[YourName]/
 ├── app/
-│   ├── reminder.sh           # Main reminder logic (auto-created)
-│   └── functions.sh          # Helper functions (auto-created)
+│   └── reminder.sh
 ├── modules/
-│   └── functions.sh          # Additional function modules (auto-created)
+│   └── functions.sh
 ├── assets/
-│   └── submissions.txt       # Student submission data (auto-created)
+│   └── submissions.txt
 ├── config/
-│   └── config.env           # Application configuration (auto-created)
-└── startup.sh               # Application startup script (auto-created)
+│   └── config.env
+└── startup.sh
+
+## Automatically Generated Files
+
+The following files are **automatically created** by the `create_environment.sh` script:
+
+- **config/config.env**: Contains assignment name and days remaining
+- **assets/submissions.txt**: Sample student submission data with headers
+- **modules/functions.sh**: Contains the `check_submissions` function
+- **app/reminder.sh**: Main reminder script that checks submissions
+- **startup.sh**: Entry point script that sources configs and runs the reminder
+
+**Important**: Do not manually edit these files as they will be overwritten when you run the create environment script again.
+
+## Usage Instructions
+
+### Initial Setup
+1. Run the create environment script:
+    bash
+   ./create_environment.sh
+   
+2. Enter your name when prompted
+3. The script will create the complete directory structure
+
+### Running the System
+1. Execute the copilot script:
+    bash
+   ./copilot_shell_script.sh
+   
+2. Enter the assignment name when prompted
+3. The system will automatically run `startup.sh` and display submission reminders
+
+### Manual Verification (Optional)
+You can manually check or run the startup script:
+    bash
+cd submission_reminder_[YourName]
+./startup.sh
+ 
+
+## Error Messages and Troubleshooting
+
+### create_environment.sh Errors
+
+**ERROR: Name cannot be empty**
+- **Cause**: No name was entered when prompted
+- **Solution**: Re-run the script and provide a valid name
+
+**ERROR: Directory 'submission_reminder_[name]' already exists**
+- **Cause**: A directory with that name already exists
+- **Solution**: Remove the existing directory or use a different name
+
+**Verification failed: Missing file [filename]**
+- **Cause**: One of the required files wasn't created properly
+- **Solution**: Check file permissions and disk space, then re-run the script
+
+### copilot_shell_script.sh Errors
+
+**ERROR: Assignment name cannot be empty**
+- **Cause**: No assignment name was entered when prompted
+- **Solution**: Re-run the script and provide a valid assignment name
+
+**ERROR: No submission reminder directory found**
+- **Cause**: The create environment script hasn't been run yet
+- **Solution**: Run `create_environment.sh` first to create the necessary structure
+
+**ERROR: No startup script found**
+- **Cause**: The startup.sh file is missing from the submission reminder directory
+- **Solution**: Re-run the create environment script to regenerate all files
+
+## System Features
+
+- **Automatic Environment Setup**: Creates complete directory structure and all necessary files
+- **Dynamic Assignment Updates**: Easily change assignment names through the copilot script
+- **Student Submission Tracking**: Monitors which students haven't submitted assignments
+- **Error Prevention**: Comprehensive error checking for missing files and empty inputs
+- **User-Friendly Interface**: Clear prompts and "Press any key to exit" functionality
+
+## Technical Details
+
+### Shebang Configuration
+All scripts use the standard shebang format:
+    bash
+#!/usr/bin/bash
 
 
-**Note**: All files are automatically created and populated by the `create_environment.sh` script.
+### File Permissions
+The create environment script automatically sets execute permissions on:
+- app/reminder.sh
+- modules/functions.sh 
+- startup.sh
 
-## Key Features
+### Sample Data
+The system includes sample student data for testing:
+- Students: Chinemerem, Chiagoziem, Divine, Anissa, Joseph, Joshua, Oke, Oluwatomi, Nkem
+- Assignments: Shell Navigation, Git, Shell Basics
+- Statuses: submitted, not submitted
 
-### Environment Setup
-- **Fully Automated**: The `create_environment.sh` script creates all directories, files, and content automatically
-- **Complete File Generation**: Automatically generates `reminder.sh`, `functions.sh`, `config.env`, `submissions.txt`, and `startup.sh` with proper content
-- **Permission Management**: Sets executable permissions for all .sh files
-- **Zero Manual Setup**: No need to manually create or edit any files - everything is handled by the script
+## Automated Execution
 
-#Troubleshooting
-
-**Directory Already Exists**
-- Remove existing directory or choose a different name
-- The script will notify you if conflicts occur
-
-**Configuration Update Issues**
-- Ensure you're running `copilot_shell_script.sh` from the correct directory
-- Verify the config file path is accessible
-
-
-## Assignment Requirements Checklist
-
--  Created `create_environment.sh` with full automation
--  Implemented `copilot_shell_script.sh` for assignment management
--  Used proper Git branching workflow (feature → main)
--  Added comprehensive error handling
--  Followed all submission guidelines
--  Created detailed README.md documentation
-
-## Author
-
-**Nkem Jeferson Achia**  
-*Individual Summative Lab - Linux Application Development* 
-
+The **copilot script automatically runs the startup.sh script**, so there is no need to run it manually. However, you can:
+- Check the contents of `startup.sh` to review what will be executed
+- Run the `startup.sh` script manually to verify functionality
+- Navigate to the submission reminder directory and execute it directly
