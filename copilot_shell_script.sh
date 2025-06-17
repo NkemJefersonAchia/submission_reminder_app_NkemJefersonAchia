@@ -18,3 +18,6 @@ startup_script=$(find . -path "*/submission_reminder_*/startup.sh" 2>/dev/null |
 # Change to the directory containing startup.sh before running it
 cd "$(dirname "$startup_script")"
 bash "./startup.sh"
+
+echo "Press any key to exit..."
+read -n 1 -s

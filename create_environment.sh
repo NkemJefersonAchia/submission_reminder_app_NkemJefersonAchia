@@ -116,4 +116,5 @@ chmod +x $root_dir/startup.sh
 
 echo " Environment created successfully"
 
-
+echo "Press any key to exit..."
+read -n 1 -s
