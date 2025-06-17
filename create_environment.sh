@@ -3,21 +3,32 @@
 echo "This script creates the necessary directories and subdirectories"
 echo " What is your name:"
 read name
+
+# Error handling 1: Check if name is empty
+if [[ -z "$name" ]]; then
+    echo "ERROR: Name cannot be empty"
+    echo "Press any key to exit..."
+    read -n 1 -s
+    exit 1
+fi
+
 root_dir=submission_reminder_$name
+
+# Error handling 2: Check if directory already exists
+if [[ -d "$root_dir" ]]; then
+    echo "ERROR: Directory '$root_dir' already exists"
+    echo "Press any key to exit..."
+    read -n 1 -s
+    exit 1
+fi
 mkdir $root_dir
-##
-##
-##
-##
-##
+
+
 #create the app directory and populate with the reminder.sh script
 mkdir -p $root_dir/app/
 touch $root_dir/app/reminder.sh
 chmod +x $root_dir/app/reminder.sh
-##
-##
-##
-##
+
 #populating the reminder.sh script
 {
 	echo '#!/bin/bash'
@@ -36,10 +47,9 @@ chmod +x $root_dir/app/reminder.sh
 
 	echo 'check_submissions $submissions_file'
 } >> $root_dir/app/reminder.sh
-##
-##
-##
-##
+
+
+
 #create the modules directory and populate with the functions.sh script and make it executable
 mkdir -p $root_dir/modules/
 touch $root_dir/modules/functions.sh
@@ -85,9 +95,8 @@ touch $root_dir/assets/submissions.txt
 	echo "Oluwatomi, Git, not submitted"
 	echo "Nkem, Shell Navigation, not submitted"
 } >> $root_dir/assets/submissions.txt
-##
-##
-##
+
+
 #create the config dir and populate with the config.env file 
 mkdir -p $root_dir/config/
 touch $root_dir/config/config.env
@@ -112,9 +121,35 @@ chmod +x $root_dir/startup.sh
 	echo 'source ./config/config.env'
 	echo 'source ./modules/functions.sh'
 	echo './app/reminder.sh'
-} >> $root_dir/startup.sh
+} >> $root_dir/startup.sh 
+
+#Error Handling 3: This part of the code verifies and checks if all files have been created or if a file is missing
+
+
+echo "Verifying created structure..."
+required_files=(
+    "$root_dir/app/reminder.sh"
+    "$root_dir/modules/functions.sh"
+    "$root_dir/assets/submissions.txt"
+    "$root_dir/config/config.env"
+    "$root_dir/startup.sh"
+)
+
+for file in "${required_files[@]}"; do
+    if [[ ! -f "$file" ]]; then
+        echo "Verification failed: Missing file $file"
+	sleep 2
+	exit 1
+    fi
+done
+
+
 
 echo " Environment created successfully"
+
+#this part of the code was added just to make my code more beautiful and to learn how to close the display screen when you press a button on the keyboard
+
+sleep 2
 
 echo "Press any key to exit..."
 read -n 1 -s
