@@ -41,7 +41,12 @@ fi
 
 # Change to the directory containing startup.sh before running it
 cd "$(dirname "$startup_script")"
+
+echo " Automatically running the startup.sh script from $startup_script"
+sleep 2
+clear
 bash "./startup.sh"
 
+echo " To check for other assignments, run the startup.sh script in $startup_script"
 echo "Press any key to exit..."
 read -n 1 -s

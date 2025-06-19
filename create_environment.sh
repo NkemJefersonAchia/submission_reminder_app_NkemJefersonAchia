@@ -51,7 +51,7 @@ chmod +x $root_dir/modules/functions.sh
 	echo '#!/bin/bash'
 	echo '# Function to read submissions file and output students who have not submitted'
 	echo 'function check_submissions {'
-		echo 'echo 'local submissions_file=$''
+		echo 'echo 'local submissions_file= $1''
 		echo 'echo "Checking submissions in $submissions_file"'
 		echo '# Skip the header and iterate through the lines'
 		echo 'while IFS=, read -r student assignment status; do'
