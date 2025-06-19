@@ -1,8 +1,7 @@
 #!/bin/bash
 
 echo "Welcome to the copilot shell script"
-echo "Enter the new assignment name:"
-read assignment_name
+read -p "Enter the assignment name: " assignment_name
 
 # Error handling 1: Check if assignment name is empty
 if [[ -z "$assignment_name" ]]; then
