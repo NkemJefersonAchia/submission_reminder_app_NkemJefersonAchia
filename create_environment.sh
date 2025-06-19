@@ -1,9 +1,7 @@
 #!/usr/bin/bash
 
 echo "This script creates the necessary directories and subdirectories"
-echo " What is your name:"
-read name
-
+read -p " Hello, please enter your name: " name
 # Error handling 1: Check if name is empty
 if [[ -z "$name" ]]; then
     echo "ERROR: Name cannot be empty"
@@ -32,23 +30,17 @@ chmod +x $root_dir/app/reminder.sh
 #populating the reminder.sh script
 {
 	echo '#!/bin/bash'
-	echo ''
 	echo '# Source environment variables and helper functions'
 	echo 'source ./config/config.env'
 	echo 'source ./modules/functions.sh'
-	echo ''
 	echo '# Path to the submissions file'
 	echo 'submissions_file="./assets/submissions.txt"'
-	echo ''
 	echo '# Print remaining time and run the reminder function'
 	echo 'echo "Assignment: $ASSIGNMENT"'
 	echo 'echo "Days remaining to submit: $DAYS_REMAINING days"'
 	echo 'echo "--------------------------------------------"'
-
 	echo 'check_submissions $submissions_file'
 } >> $root_dir/app/reminder.sh
-
-
 
 #create the modules directory and populate with the functions.sh script and make it executable
 mkdir -p $root_dir/modules/
@@ -57,19 +49,16 @@ chmod +x $root_dir/modules/functions.sh
 
 {
 	echo '#!/bin/bash'
-	echo ''
 	echo '# Function to read submissions file and output students who have not submitted'
 	echo 'function check_submissions {'
 		echo 'echo 'local submissions_file=$''
 		echo 'echo "Checking submissions in $submissions_file"'
-		echo 'echo ""'
 		echo '# Skip the header and iterate through the lines'
 		echo 'while IFS=, read -r student assignment status; do'
 			echo '# Remove leading and trailing whitespace'
 			echo 'student=$(echo "$student" | xargs)'
 			echo 'assignment=$(echo "$assignment" | xargs)'
 			echo 'status=$(echo "$status" | xargs)'
-			echo 'echo ""'
 			echo '# Check if assignment matches and status is 'not submitted''
 			echo 'if [[ "$assignment" == "$ASSIGNMENT" && "$status" == "not submitted" ]]; then'
 				echo 'echo "Reminder: $student has not submitted the $ASSIGNMENT assignment!"'
@@ -127,6 +116,8 @@ chmod +x $root_dir/startup.sh
 
 
 echo "Verifying created structure..."
+sleep 2
+
 required_files=(
     "$root_dir/app/reminder.sh"
     "$root_dir/modules/functions.sh"
