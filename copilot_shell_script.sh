@@ -38,8 +38,7 @@ if [[ -z "$startup_script" ]]; then
     exit 1
 fi
 
-
-# Change to the directory containing startup.sh before running it
+# Change to the directory containing startup.sh and then run the script 
 cd "$(dirname "$startup_script")"
 
 echo " Automatically running the startup.sh script from $startup_script"
